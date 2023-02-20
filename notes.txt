@@ -1,0 +1,49 @@
+** VS code'un settings menüsünden exclude özelliğini kullanarak, .NET webapi projesi ile oluşan obj ve bin dosyalarının
+solution explorer'da gösterilmemesini sağladım.
+
+** Properties/launchSettings.json dosyasında launchBrowser ayarını false olarak değiştirdim böylece uygulama çalıştırıldığında browser açılmayacak.
+
+** launchSettings property'sinde bulunan profile'lardan üstteki (http ve https profillerini içeren) kestrel sunucusu,
+alttaki (IIS Express adında olan) ise IIS sunucusunu kullanır. Default olarak kestrel ile başlatılır. Visual studio kullanıyorsak IIS sunucusu kullanmayı da tercih edebiliriz. Uygulama başlarken kullanmak istediğimiz profile'ı
+"dotnet run -lp profileName" ile seçebiliriz. lp anlamı launch profile.
+
+** profiller'den iisSettings adlı profili silmeye karar verdim. Çünkü IIS mac'te çalışmıyor. http profilini de sildim. Uygulamayı tabi ki https kullanarak çalıştıracağım. https profilinin içinde de iki farklı seçenek değil sadece tek bir host url kullandım. Diğerini sildim. https profilinin de adını api olarak değiştirmeyi tercih ettim.
+
+** .csproj dosyasındaki nullable ve implicit using property'lerini istediğimiz gibi değiştirebiliriz. Benim tercihim implicit using kullanmamak. Nullabe ?????????
+
+** Program.cs dosyasında builder.AddSwaggerGen() servis extension'unu kaldırmayı tercih ediyorum.
+
+** webapi projesine isim vermek için dotnet new webapi -n ProjeIsmi şeklinde oluşturabiliriz.
+
+** projeyi oluşturduktan sonra "dotnet sln add API" komutu ile projeyi solution içine ekledim.
+
+** VS Code'da C# ile geliştirme tecrübesini iyileştirmek için bazı extension'lar eklemek gerekir. İlki microsoft'un C# extension'ı ikincisi ise JosKreativ'in C# extensions adlı extension'ı ekledim.
+
+** C# extension'ının "Generate Assets for Build and Debug" özelliğini kullanarak build ve debug için gerekli dosyaları ekledim. Bu dosyalar .vscode adlı bir klasörün içine eklenir.
+
+** global.json dosyası ile hangi SDK versiyonunu kullanacağımızı seçebiliriz.
+
+** VS Code File kısmından Auto save özelliğini aktif etmeyi tercih ettim.
+
+** C# Extension'ının import completion özelliğini aktif etmek faydalı.
+
+** Private field initialization'ını kolaylaştırmak için C# extensions adlı extension'ın ayalarından private member prefix'ini "_" karakteri ile değiştirebiliriz.
+
+** VS Code'da compact folders ayarını kapatmak faydalı.
+
+** Swashbuckle ve OpenApi proje referanslarını csproj dosyasından silip dotnet restore komutunu çalıştırdım. Bu projeden package silmek demek bu ikisini sildim çünkü swagger ile ilgili şeyler. Ben swagger yerine postman kullanmayı terchi ediyorum.
+
+** appsettings.Development.json dosyasında Microsoft.AspNetCore field'ını Warning'ten Information olarak değiştirdim. Development'ta mümkün olduğunda ayrıntılı logging severim.
+
+** app environment'ini launchSettings dosyasından değiştirebiliriz.
+
+** csproj dosyasında nullable tagini disable ettim. Implicit using iki türlü de kullanılabilir.
+
+** extension yüklemek için nuget galery extension'ını kullanıyorum. Bu extension paketi yükledikten sonra otomatik olarak dotnet restore komutunu çalıştırıyor. Bu komutun bir paket yüklendikten sonra çalıştırılması lazım.
+
+** migration özelliğini kullanabilmek için dotnet-ef paketine ihtiyaç var.
+
+** cihazda yüklü (global olarak) dotnet toollarını görüntülemek için dotnet tool list -g komutunu kullanabiliriz.
+Cihazdaki toolları güncellemek ya da silmek için dotnet tool update veya dotnet tool uninstall komutlarını kullanabiliriz.
+
+** dotnet new 
