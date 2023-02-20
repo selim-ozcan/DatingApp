@@ -48,4 +48,6 @@ Cihazdaki toolları güncellemek ya da silmek için dotnet tool update veya dotn
 
 ** dotnet new gitignore ile dotnet projesi için gitignore dosyası oluşturabiliriz.
 
-** ohmyzsh mac için güzel bir terminal tool. git kullanırken yardımcı oluyor. Branchi vs gösteriyorç
+** ohmyzsh mac için güzel bir terminal tool. git kullanırken yardımcı oluyor. Branchi vs gösteriyor.
+
+** VS Code ayarlarında auto closing brackets özelliğini açtım.

@@ -14,7 +14,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().WithOrigins(builder.Configuration.GetValue<String>("ClientUrl")));
 
 app.MapControllers();
+
 
 app.Run();
