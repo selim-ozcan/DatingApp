@@ -46,4 +46,6 @@ alttaki (IIS Express adında olan) ise IIS sunucusunu kullanır. Default olarak 
 ** cihazda yüklü (global olarak) dotnet toollarını görüntülemek için dotnet tool list -g komutunu kullanabiliriz.
 Cihazdaki toolları güncellemek ya da silmek için dotnet tool update veya dotnet tool uninstall komutlarını kullanabiliriz.
 
-** dotnet new 
+** dotnet new gitignore ile dotnet projesi için gitignore dosyası oluşturabiliriz.
+
+** ohmyzsh mac için güzel bir terminal tool. git kullanırken yardımcı oluyor. Branchi vs gösteriyorç
