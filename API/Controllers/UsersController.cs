@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    [Authorize]
+    public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
 
@@ -36,7 +32,7 @@ namespace API.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<AppUser>> GetUserByUsername(string username) 
         {
-            return await this._context.Users.SingleOrDefaultAsync(user => user.UserName.Equals(username));
+            return await this._context.Users.SingleOrDefaultAsync(user => user.UserName == username);
         }
 
     }

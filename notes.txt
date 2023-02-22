@@ -51,3 +51,13 @@ Cihazdaki toolları güncellemek ya da silmek için dotnet tool update veya dotn
 ** ohmyzsh mac için güzel bir terminal tool. git kullanırken yardımcı oluyor. Branchi vs gösteriyor.
 
 ** VS Code ayarlarında auto closing brackets özelliğini açtım.
+
+** dotnet watch komutunu --no-hot-reload ile kullanmak daha sağlıklı. Hot-reload .net 6 dan beri var ancak düzgün çalışmıyor. --no-hot-reload ile hot reload devre dışı bırakılıyor ancak dosyalarda herhangi bir değişiklik olduğunda proje otomatik olarak tekrardan ayağa kaldırılıyor. dotnet watch komutu bir dosyada değişiklik olduğu zaman otomatik olarak dotnet run komutunu çağırır. Yani sadece hot-reload'dan ibaret değildir. --no-hot-reload kullanarak dotnet watch komutunun düzgün çalışmasını sağlayabiliriz.
+
+** VS Code debugger'ında .NET Core launch (web) özelliğini seçersek aynı anda programı çalıştırır ve debugger'ı ekler.
+Uygulama çalışırken olanları izlemek istiyorsak kullanışlıdır. Örneğin Program.cs dosyasına breakpoint koyduysak...
+.NET Core Attach seçeneği ise önce programı çalıştırır sonra ise debuggerı çalıştırır. Yani Bunu ancak Http isteği gelince uygulamanın davranışını izlemek gibi program çalıştıktan sonra gerçekleşen olayları izlemede kullanabiliriz.
+
+** ApiController Attribute'u otomatik olarak model binding yapar ve api action metodu çalıştırılmadan önce otomatik olarak validitonları gerçekleştirir. Eğer validation hatası varsa otomatik olarak BadRequest döndürür ve action metotu hiç çalıştırmaz.
+
+** Validation'ları DTO üzerinde de yapabiliriz.
