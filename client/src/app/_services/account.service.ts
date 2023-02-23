@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl: string = environment.baseUrl;
   private currentUserSource: BehaviorSubject<User | null> =
     new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) {
-    // App çalıştırıldığında. Yani browser kapatıp açıldığında vs. log in olmuş bir kullanıcı var mı diye kontrol etmek. Kursta bu olayı AppComponent'in ngOnInit metodunda yapıyor.
     if (localStorage.length > 0) {
       const userString = localStorage.getItem('user');
       if (!userString) return;
