@@ -61,3 +61,7 @@ Uygulama çalışırken olanları izlemek istiyorsak kullanışlıdır. Örneği
 ** ApiController Attribute'u otomatik olarak model binding yapar ve api action metodu çalıştırılmadan önce otomatik olarak validitonları gerçekleştirir. Eğer validation hatası varsa otomatik olarak BadRequest döndürür ve action metotu hiç çalıştırmaz.
 
 ** Validation'ları DTO üzerinde de yapabiliriz.
+
+** dotnet cli ve angular cli kullanırken --dry-run özelliği çok kullanışlı.
+
+** async pipe, observable, subject, behaviorsubject, guards(canActivate, canDeactivate), interceptors harika.
