@@ -28,3 +28,9 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="accountService.currentUser$ | async" class="container">
+  <h1 class="text-center" style="margin-top: 200px">
+    İnşaAllah bir gün o da olacak.
+  </h1>
+</div>

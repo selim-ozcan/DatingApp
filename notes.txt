@@ -65,3 +65,4 @@ Uygulama çalışırken olanları izlemek istiyorsak kullanışlıdır. Örneği
 ** dotnet cli ve angular cli kullanırken --dry-run özelliği çok kullanışlı.
 
 ** async pipe, observable, subject, behaviorsubject, guards(canActivate, canDeactivate), interceptors harika.
+** finalize, catchError, map, take, delay pipe'ları
