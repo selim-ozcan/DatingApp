@@ -32,9 +32,10 @@
       dropdown
       *ngIf="accountService.currentUser$ | async as user"
     >
+      <img [src]="user.photoUrl || '/assets/user.png'" alt="" />
       <a
         dropdownToggle
-        class="dropdown-toggle text-light"
+        class="dropdown-toggle text-light ms-2"
         style="text-decoration: none"
         >Welcome {{ user.username | titlecase }}</a
       >
