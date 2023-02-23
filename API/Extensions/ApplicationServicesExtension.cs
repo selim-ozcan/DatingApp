@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using API.Data;
 using API.Interfaces;
 using API.Services;
@@ -20,6 +16,7 @@ namespace API.Extensions
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
