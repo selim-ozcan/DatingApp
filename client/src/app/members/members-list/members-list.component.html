@@ -1,8 +1,8 @@
-<!-- <div class="text-center mt-3">
+<div class="text-center mt-3">
   <h2>Your matches - {{ pagination?.totalItems }} found</h2>
-</div> -->
+</div>
 
-<!-- <div class="container mt-3" *ngIf="userParams">
+<div class="container mt-3" *ngIf="userParams">
   <form
     #form="ngForm"
     class="d-flex mb-3"
@@ -74,26 +74,27 @@
       </div>
     </div>
   </form>
-</div> -->
+</div>
 
 <div class="row">
-  <div class="col-2" *ngFor="let member of members$ | async">
+  <div class="col-2" *ngFor="let member of members">
     <app-member-card [member]="member"></app-member-card>
   </div>
 </div>
 
-<!-- <div class="d-flex justify-content-center" *ngIf="pagination">
+<div class="d-flex justify-content-center" *ngIf="pagination">
   <pagination
-    [boundaryLinks]="true"
+    class="pagination"
     [totalItems]="pagination.totalItems"
-    [itemsPerPage]="pagination.itemsPerPage"
-    [maxSize]="10"
     [(ngModel)]="pagination.currentPage"
+    [rotate]="true"
     (pageChanged)="pageChanged($event)"
     previousText="&lsaquo;"
     nextText="&rsaquo;"
     firstText="&laquo;"
     lastText="&raquo;"
-  >
-  </pagination>
-</div> -->
+    [maxSize]="10"
+    [boundaryLinks]="true"
+    [itemsPerPage]="pagination.itemsPerPage"
+  ></pagination>
+</div>
