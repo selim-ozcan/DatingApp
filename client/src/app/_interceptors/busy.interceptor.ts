@@ -16,6 +16,8 @@ export class BusyInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    if (request.url === 'https://localhost:5001/api/messages')
+      return next.handle(request);
     this.busyService.busy();
     return next.handle(request).pipe(
       delay(500),

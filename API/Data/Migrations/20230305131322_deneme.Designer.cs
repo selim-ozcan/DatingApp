@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230305131322_deneme")]
+    partial class deneme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -91,14 +94,14 @@ namespace API.Data.Migrations
                     b.Property<string>("RecipientUsername")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("SendeUsername")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("SenderDeleted")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SenderId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("SenderUsername")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -106,7 +109,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("API.Entities.Photo", b =>
@@ -154,13 +157,13 @@ namespace API.Data.Migrations
                     b.HasOne("API.Entities.AppUser", "Recipient")
                         .WithMany("MessagesReceived")
                         .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("API.Entities.AppUser", "Sender")
                         .WithMany("MessagesSent")
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Recipient");
