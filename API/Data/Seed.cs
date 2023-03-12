@@ -15,9 +15,9 @@ namespace API.Data
         //     await context.SaveChangesAsync();
         // }
 
-        public static async Task SeedUsers(DataContext context)
+        public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
-            if (await context.Users.AnyAsync()) return;
+            if (await userManager.Users.AnyAsync()) return;
 
             var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
 
@@ -25,18 +25,33 @@ namespace API.Data
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData, options);
 
-            foreach (var user in users)
+            var roles = new List<AppRole>
             {
-                using var hmac = new HMACSHA512();
+                new AppRole { Name= "Member"},
+                new AppRole { Name= "Admin"},
+                new AppRole { Name= "Moderator"},
+            };
 
-                user.UserName = user.UserName.ToLower();
-                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("password"));
-                user.PasswordSalt = hmac.Key;
-
-                context.Users.Add(user);
+            foreach (var role in roles)
+            {
+                await roleManager.CreateAsync(role);
             }
 
-            await context.SaveChangesAsync();
+            foreach (var user in users)
+            {
+                user.UserName = user.UserName.ToLower();
+ 
+                await userManager.CreateAsync(user, "selim");
+                await userManager.AddToRoleAsync(user, "Member");
+            }
+
+            var admin = new AppUser
+            {
+                UserName = "admin"
+            };
+
+            await userManager.CreateAsync(admin, "selim");
+            await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator"});
         }
     }
 }

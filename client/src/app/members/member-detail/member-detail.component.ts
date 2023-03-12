@@ -7,6 +7,7 @@ import {
 } from '@kolkov/ngx-gallery';
 import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
 import { MembersService } from 'src/app/_services/members.service';
@@ -30,7 +31,8 @@ export class MemberDetailComponent implements OnInit {
     public membersService: MembersService,
     private messageService: MessageService,
     private route: ActivatedRoute,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toast: ToastrService
   ) {
     this.route.data.subscribe({
       next: (data) => {
@@ -110,5 +112,14 @@ export class MemberDetailComponent implements OnInit {
     if (this.activeTab.heading === 'Messages') {
       this.loadMessages();
     }
+  }
+
+  likeUser() {
+    if (!this.member?.userName) return;
+    this.membersService.addLike(this.member?.userName).subscribe({
+      next: (response) => {
+        this.toast.success('You liked ' + this.member?.userName);
+      },
+    });
   }
 }
