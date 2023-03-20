@@ -1,5 +1,5 @@
 <div class="container">
-  <div
+  <!-- <div
     *ngIf="!registerMode && !(accountService.currentUser$ | async)"
     style="text-align: center"
   >
@@ -13,24 +13,13 @@
       </button>
       <button class="btn btn-info">Learn More</button>
     </div>
-  </div>
+  </div> -->
 
-  <div
-    *ngIf="registerMode && !(accountService.currentUser$ | async)"
-    class="container"
-  >
+  <div *ngIf="!(accountService.currentUser$ | async)" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
-        <app-register
-          (cancelRegister)="cancelRegisterMode($event)"
-        ></app-register>
+        <app-register></app-register>
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="accountService.currentUser$ | async" class="container">
-  <h1 class="text-center" style="margin-top: 200px">
-    İnşaAllah bir gün o da olacak.
-  </h1>
 </div>

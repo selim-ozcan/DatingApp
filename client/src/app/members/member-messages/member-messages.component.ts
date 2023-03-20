@@ -1,28 +1,36 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { take } from 'rxjs';
 import { Message } from 'src/app/_models/message';
+import { AccountService } from 'src/app/_services/account.service';
 import { MessageService } from 'src/app/_services/message.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-member-messages',
   templateUrl: './member-messages.component.html',
   styleUrls: ['./member-messages.component.css'],
 })
 export class MemberMessagesComponent implements OnInit {
-  @Input('messages') messages: Message[] = [];
   @Input('username') username: string | undefined;
+
   message: string = '';
 
-  constructor(private messageService: MessageService) {}
+  constructor(public messageService: MessageService) {}
 
   ngOnInit(): void {}
 
   sendMessage() {
     if (!this.username) return;
-    this.messageService.sendMessage(this.username, this.message).subscribe({
-      next: (msg) => {
-        this.messages.push(msg);
-        this.message = '';
-      },
+    this.messageService.sendMessage(this.username, this.message).then(() => {
+      this.message = '';
     });
   }
 }

@@ -35,11 +35,6 @@ namespace API.Data
             return await _context.Users.Include(user => user.Photos).ToListAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
@@ -55,7 +50,7 @@ namespace API.Data
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            var minDob = DateOnly.FromDateTime(DateTime.UtcNow).AddYears(userParams.MaxAge * -1);
+            var minDob = DateOnly.FromDateTime(DateTime.UtcNow).AddYears(userParams.MaxAge * -1 - 1);
             var maxDob = DateOnly.FromDateTime(DateTime.UtcNow).AddYears(userParams.MinAge * -1);
             var sort = userParams.OrderBy;
 
@@ -64,11 +59,16 @@ namespace API.Data
             .Where(user => user.Gender == userParams.Gender)
             .Where(user => user.DateOfBirth >= minDob
                         && user.DateOfBirth <= maxDob)
-            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .OrderByDescending(user => sort == "lastActive" ? user.LastActive : user.Created)
+            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .AsNoTracking();
 
             return await PagedList<MemberDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);    
+        }
+
+        public async Task<string> GetUserGender(string username)
+        {
+            return await _context.Users.Where(x => x.UserName == username).Select(x => x.Gender).FirstOrDefaultAsync();
         }
     }
 }

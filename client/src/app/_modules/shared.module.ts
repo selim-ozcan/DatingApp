@@ -18,7 +18,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 2000,
+      timeOut: 4000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),

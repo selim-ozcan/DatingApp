@@ -3,6 +3,7 @@ using API.Data;
 using API.Helpers;
 using API.Interfaces;
 using API.Services;
+using API.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions
@@ -14,18 +15,22 @@ namespace API.Extensions
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<ITokenService, TokenService>();
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            // services.AddScoped<IUserRepository, UserRepository>();
+            // services.AddScoped<ILikesRepository, LikesRepository>();
+            // services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
 
             services.AddScoped<LogUserActivity>();
+            services.AddSignalR();
+
+            services.AddSingleton<PresenceTracker>();
 
             return services;
         }

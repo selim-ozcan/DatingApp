@@ -20,7 +20,7 @@ export class BusyInterceptor implements HttpInterceptor {
       return next.handle(request);
     this.busyService.busy();
     return next.handle(request).pipe(
-      delay(500),
+      // delay(500), // production'da bu satırı yoruma al. Prod. buildinde fake delay istemeyiz.
       finalize(() => {
         this.busyService.idle();
       })

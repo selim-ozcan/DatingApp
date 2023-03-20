@@ -17,7 +17,6 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup = new FormGroup({});
   bsConfig: Partial<BsDatepickerConfig> | undefined;
   maxDate: Date = new Date();
@@ -79,17 +78,12 @@ export class RegisterComponent implements OnInit {
     const values = { ...this.registerForm.value, dateOfBirth: dob };
     this.accountService.register(values).subscribe({
       next: (_) => {
-        this.cancel();
         this.router.navigateByUrl('/members');
       },
       error: (error) => {
         this.validationErrors = error;
       },
     });
-  }
-
-  cancel() {
-    this.cancelRegister.emit(false);
   }
 
   private getDateOnly(dob: string | undefined) {
