@@ -1,6 +1,6 @@
-# fly.toml file generated for socialchatapp on 2023-03-20T17:34:18+03:00
+# fly.toml file generated for hasbihal on 2023-03-21T02:31:09+03:00
 
-app = "socialchatapp"
+app = "hasbihal"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "ams"
@@ -13,7 +13,7 @@ processes = []
   ASPNETCORE_URLS="http://+:8080"
   CloudinarySettings__CloudName="deb5ri0sa"
   CloudinarySettings__ApiKey="464572473688188"
-
+  
 [experimental]
   auto_rollback = true
 
