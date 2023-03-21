@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MemberMessagesComponent implements OnInit {
   @Input('username') username: string | undefined;
-
+  loading = false;
   message: string = '';
 
   constructor(public messageService: MessageService) {}
@@ -29,8 +29,12 @@ export class MemberMessagesComponent implements OnInit {
 
   sendMessage() {
     if (!this.username) return;
-    this.messageService.sendMessage(this.username, this.message).then(() => {
-      this.message = '';
-    });
+    this.loading = true;
+    this.messageService
+      .sendMessage(this.username, this.message)
+      .then(() => {
+        this.message = '';
+      })
+      .finally(() => (this.loading = false));
   }
 }
